@@ -54,13 +54,11 @@ grid-area: f;}
 
 <script type="text/javascript">
 function expandMenu(){
-	console.log(document.getElementById('c').classList[0]);
 	wrap = document.getElementById("wrapper");
 	if (document.getElementById('c').classList[0]==='hide'){
-		console.log('something');
 		wrap.style.gridTemplateAreas = "'a b b b' 'c c d e' 'f f f f'";
 	} else {
-	wrap.style.gridTemplateAreas = "'a b b b' 'd d d e' 'f f f f'";
+		wrap.style.gridTemplateAreas = "'a b b b' 'd d d e' 'f f f f'";
 	}
 	document.getElementById('c').classList.toggle('hide');
 }
