@@ -1,0 +1,70 @@
+
+<!-- saved from url=(0085)https://dl3.pushbulletusercontent.com/y85s6irCNEckCl1zH6qvPjVZ8qpapZhm/gridstuff.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style type="text/css">
+body{
+margin:0px;}
+
+.hide{
+	display:none;
+}
+#wrapper{
+display: grid;
+grid-gap: 1px;
+background: black;
+height: 100%;
+grid-template-rows: 50px auto 30px;
+grid-template-columns: 50px 80px auto 60px;
+grid-template-areas: 'a b b b'
+					 'd d d e'
+					 'f f f f';
+}
+#a{
+background: yellow;
+grid-area: a;}
+#b{
+background: blue;
+grid-area: b;}
+#c{
+background: pink;
+grid-area: c;}
+#d{
+background: orange;
+grid-area: d;}
+#e{
+background: green;
+grid-area: e;}
+#f{
+background: brown;
+grid-area: f;}
+
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="a" onclick="expandMenu()">a</div>
+	<div id="b">b</div>
+	<div id="c" class="hide">c</div>
+	<div id="d">d</div>
+	<div id="e">e</div>
+	<div id="f">f</div>
+</div>
+
+<script type="text/javascript">
+function expandMenu(){
+	console.log(document.getElementById('c').classList[0]);
+	wrap = document.getElementById("wrapper");
+	if (document.getElementById('c').classList[0]==='hide'){
+		console.log('something');
+		wrap.style.gridTemplateAreas = "'a b b b' 'c c d e' 'f f f f'";
+	} else {
+	wrap.style.gridTemplateAreas = "'a b b b' 'd d d e' 'f f f f'";
+	}
+	document.getElementById('c').classList.toggle('hide');
+}
+</script>
+
+</body>
+</html>
