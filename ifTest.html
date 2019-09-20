@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<button onclick="doThis('a')" id="a">this</button>
+<button onclick="doThis('b')" id="b">this</button>
+<button onclick="doThis('c')" id="c">this</button>
+
+<script>
+
+let i=0;
+
+/*
+function doThis(){
+    if(i>1){
+        console.log(i);
+        i=0;
+    }
+    if(i==0){
+        console.log(i + ' if');
+        i++;
+    }
+    else{
+        console.log(i + ' else');
+        i++;
+    }
+}
+*/
+
+let selected=false;
+let clicked;
+let lastClicked;
+function doThis(input){
+    clicked = input;
+    if(clicked == lastClicked){
+        selected = !selected;
+    }
+    if(selected && (clicked==lastClicked)){
+        console.log('remove borders');
+        //selected = true;
+    }
+    else{
+        console.log('add border');
+        selected = false;
+    }
+    lastClicked = clicked;
+}
+
+
+</script>
+</body>
+</html>
