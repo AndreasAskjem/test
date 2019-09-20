@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.false">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="updateState('a')">Button A</button>
+    <button onclick="updateState('b')">Button B</button>
+    
+
+    <script>
+    let currentState = false;
+    let clicked;
+    let lastClicked;
+    function updateState(input){
+        clicked = input;
+        if(lastClicked == clicked){
+            if(currentState == false){
+                state1();
+                console.log('Clicked 3/5/... times');
+                currentState = true;
+                }
+            else{
+                state2();
+                console.log('Clicked 2/4/... times');
+                currentState = false;
+                }
+            }
+        else{
+            state1();
+            currentState = true;
+            console.log('Clicked 1 times')
+            }
+        lastClicked = clicked;
+        console.log(currentState);
+    }
+
+    function state1(){
+        console.log('remove borders, addBorder');
+    }
+    function state2(){
+        console.log('remove borders');
+    }
+
+    </script>
+</body>
+</html>
