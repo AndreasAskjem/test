@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let shuffledArr = [];
+let temp;
+for(i=arr.length; i > 0; i--){
+    randomNumber = Math.floor(Math.random() * i);
+    temp = arr.splice(randomNumber,1)
+    console.log(temp);
+    shuffledArr.push(temp[0]);
+    console.log(arr);
+    console.log(shuffledArr);
+}
+
+</script>
+</body>
+</html>
