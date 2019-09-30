@@ -4,6 +4,7 @@ let playerList = []
 function nameIsSubmitted(){
     let submittedName = document.getElementById('username').value;
     document.getElementById('username').value = '';
+    document.getElementById('username').focus();
 
     playerList.push({
         name: submittedName,
@@ -12,7 +13,7 @@ function nameIsSubmitted(){
         scoreFirstHalf: 0,
         scoreTotal: 0
     })
-    console.log(submittedName);
+    //console.log(submittedName);
 }
 
 function changeHTML(){
@@ -60,7 +61,7 @@ function throwDices(){
 
     document.getElementById('theButton').disabled = true;
     throwCounter+=1;
-    console.log('This was throw nr: ' + throwCounter);
+    //console.log('This was throw nr: ' + throwCounter);
 }
 
 function submitDices(){
@@ -125,7 +126,7 @@ function selectDice(element){
     }
     else{
         document.getElementById('theButton').disabled = true;
-        console.log('BBBBBBB')
+        //console.log('BBBBBBB')
 
     }
 }
@@ -143,172 +144,60 @@ function someSelected(){
 
 
 
-
-
-//createTable();
-function createTable(){
-
-    let tableHTML = `
-    <table id="leftColumn">
-        <tr>
-            <th>Names</th>
-        </tr>
-        <tr>
-            <th>One</th>
-        </tr>
-        <tr>
-            <th>Two</th>
-        </tr>
-        <tr>
-            <th>Three</th>
-        </tr>
-        <tr>
-            <th>Four</th>
-        </tr>
-        <tr>
-            <th>Five</th>
-        </tr>
-        <tr>
-            <th>Six</th>
-        </tr>
-        <tr>
-            <th>Total 1</th>
-        </tr>
-        <tr>
-            <th>Bonus</th>
-        </tr>
-        <tr>
-            <th>1 Pair</th>
-        </tr>
-        <tr>
-            <th>2 Pairs</th>
-        </tr>
-        <tr>
-            <th>3 of a kind</th>
-        </tr>
-        <tr>
-            <th>4 of a kind</th>
-        </tr>
-        <tr>
-            <th>Full House</th>
-        </tr>
-        <tr>
-            <th>Sm Straight</th>
-        </tr>
-        <tr>
-            <th>Lg Straight</th>
-        </tr>
-        <tr>
-            <th>Chance</th>
-        </tr>
-        <tr>
-            <th>YATZY</th>
-        </tr>
-        <tr>
-            <th>Total 2</th>
-        </tr>
-    </table>
-    `;
-
-
-
-    tableHTML += `
-    <table id="scoreTable">
-        <tr>
-    `;
-    for(player in playerList){
-        tableHTML += `<th>${playerList[player].name}</th>
-        `;
-    }
-    tableHTML += `</tr>
-    `
-    for(i=0; i<6; i++){
-        tableHTML += `<tr>
-        `;
-        for(j=0; j< playerList.length; j++){
-            tableHTML += `<td>${playerList[j].scores[i]}</td>`;
-        }
-        tableHTML += `</tr>
-        `;
-    }
-
-
-    tableHTML += `<tr>
-    `;
-    for(i=0; i< playerList.length; i++){
-        tableHTML += `<th>${playerList[i].sum}</th>`;
-    }
-    tableHTML += `</tr>
-    `;
-
-
-    tableHTML += `</table>`;
-    console.log(tableHTML);
-    document.getElementById('scoreTableDiv').innerHTML = tableHTML;
-}
-
-let playerNumber = 0;
-let roundNumber = 0;
-
-function addScore(){
-    playerList[playerNumber].scores[roundNumber] = findRoundScore();
-    playerList[playerNumber].sum += findRoundScore();
-    
-    playerNumber += 1;
-
-    if(playerNumber > playerList.length-1){
-        playerNumber = 0;
-        roundNumber +=1;
-    }
-    if(roundNumber == playerList.length){
-        playerSum = 0;
-
-        playerList[playerNumber].scores[6] = 5;
-    }
-}
-
-function findRoundScore(){
-    let roundScore = 0;
-    for(i in thrownDices){
-        if(thrownDices[i] == roundNumber){
-            roundScore += 1;
-        }
-    }
-    roundScore *= (roundNumber + 1);
-    return(roundScore);
-}
-
-
-
-
-
-
 ////////////////////////////////////////////
-//let roundNumber = 0;
-
+let roundNumber = 0;
+let playerNumber = 0;
 
 function addScore(){
     playerList[playerNumber].scores[roundNumber] = findRoundScore();
 
-    playerNumber += 1;
+    playerNumber++;
 
     if(playerNumber > playerList.length-1){
         playerNumber = 0;
-        roundNumber +=1;
+        roundNumber++;
     }
-    if(roundNumber == playerList.length){
-        playerSum = 0;
 
-        playerList[playerNumber].scores[6] = 5;
+
+    /*
+    if(roundNumber == 6){
+        for(i in playerList){
+            //console.log('playerNumber ' + playerNumber);
+            findRoundScore();
+            playerNumber++;
+        }
+        playerNumber = 0;
+        roundNumber++;
+
+        for(i in playerList){
+            findRoundScore();
+            playerNumber++;
+        }
+        playerNumber = 0;
+        roundNumber++;
     }
+    */
+
+    createTable();
 }
-
+console.log
 
 function findRoundScore(){
     let roundScore = 0;
+    console.log('hello');
+    // sD = sortedDices, it took a lot of space to write the whole thing every time.
+    let sD = thrownDices.sort(function(a, b){return b - a}); // I don't know how this works.
 
-    let sortedDices = thrownDices.sort(function(a, b){return b - a});
-    sortedDices.reverse();
+    // I don't think I'm using sD before round 7, but something goes wrong if I don't put this loop inside the IF.
+    if(roundNumber>7){    
+        for(i in sD){
+            sD[i]++;
+        }
+    }
+
+    console.log('sorted dices ' + sD);
+    console.log('round ' + roundNumber);
+    console.log('player ' + playerNumber);
     switch(roundNumber){
         case 0:
         case 1:
@@ -318,31 +207,110 @@ function findRoundScore(){
         case 5:
             for(i in thrownDices){
                 if(thrownDices[i] == roundNumber){
-                    roundScore += 1;
+                    roundScore++;
                 }
             }
-            roundScore *= (roundNumber + 1);
+            roundScore = roundScore*(roundNumber + 1);
             playerList[playerNumber].scoreFirstHalf += roundScore;
             break;
         case 6: // Score of the first half
-            roundscore += playerList[playerNumber].scoreFirstHalf;
+            roundScore = playerList[playerNumber].scoreFirstHalf;
             break;
         case 7: // Bonus
             if(playerList[playerNumber].scoreFirstHalf >= 63){
-                roundScore += 35;
+                roundScore = 35;
             }
             break;
         case 8: // 1 pair
-            for(i=0; i<sortedDices-1; i++){
-                if(sortedDices[i] == sortedDices[i+1]){
-                    roundScore += sortedDices[i]*2;
+            for(i=0; i<sD.length-1; i++){
+                if(sD[i] == sD[i+1]){
+                    roundScore = sD[i]*2;
                     break;
                 }
             }
             break;
         case 9: // 2 pairs
+            let onePair = 0;
+            let anotherPair = 0;
+            for(i=0; i<sD.length-1; i++){
+                if(onePair==0 && sD[i]==sD[i+1]){
+                    onePair = sD[i]*2;
+                    i++;
+                }
+                else if(onePair>0 && sD[i]==sD[i+1]){
+                    anotherPair = sD[i]*2
+                }
+
+                if(anotherPair>0){
+                    roundScore = onePair + anotherPair;
+                }
+            }
+            break;
+        case 10: // 3 of a kind
+            for(i=0; i<sD.length-2; i++){
+                if(sD[i] == sD[i+1] && sD[i] == sD[i+2]){
+                    roundScore = sD[i]*3;
+                    break;
+                }
+            }
+            break;
+        case 11: // 4 of a kind
+            for(i=0; i<sD.length-3; i++){
+                if(sD[i] == sD[i+1] && sD[i] == sD[i+2] && sD[i] == sD[i+3]){
+                    roundScore = sD[i]*4;
+                    break;
+                }
+            }
+            break;
+        case 12: // Full House
+            if(sD[0]==sD[1] && sD[3]==sD[4]){
+                if(sD[2]==sD[0] || sD[2]==sD[4]){
+                    roundScore = sD[0] + sD[1] + sD[2] + sD[3] + sD[4];
+                }
+            }
+            break;
+        case 13: // Small Straight.
+            if(sD[0]==(sD[1]-1) && sD[0]==(sD[2]-2) && sD[0]==(sD[3]-3)){
+                roundScore = sD[0] + sD[1] + sD[2] + sD[3];
+            }
+            else if(sD[1]==(sD[2]-1) && sD[1]==(sD[3]-2) && sD[1]==(sD[4]-3)){
+                roundScore = sD[1] + sD[2] + sD[3] + sD[4];
+            }
+            break;
+        case 14: // Large Straight
+            let consecutiveNumbers = 0;
+            for(i=0; i<sD.length-1; i++){
+                if(sD[i] == (sD[i+1]-1)){
+                    consecutiveNumbers++;
+                }
+            }
+            if(consecutiveNumbers==4){
+                roundScore = sD[0] + sD[1] + sD[2] + sD[3] + sD[4];
+            }
+            break;
+        case 15: // Chance
+            roundScore = sD[0] + sD[1] + sD[2] + sD[3] + sD[4];
+            break;
+        case 16: // YATZY
+            let check = 0;
+            for(i=0; i<sD.length; i++){
+                if(sD[0]==sD[i]){
+                    check += 1;
+                }
+            }
+            if(check==5){
+                roundScore = 50;
+            }
+            break;
+        case 17: // Total Score
+            roundScore = playerList[playerNumber].scoreTotal - playerList[playerNumber].scoreFirstHalf;
+            break;
     }
+    
     playerList[playerNumber].scoreTotal += roundScore;
+    return(roundScore);
+    //playerList[playerNumber].scores[roundNumber] = roundScore;
+    //createTable();
 }
 
 
@@ -362,11 +330,7 @@ function createTable(){
     </tr>
     `;
     for(i=0; i<18; i++){
-        scoresHTML += `<tr>
-        `;
-        scoresHTML += createRow();
-        scoreHTML += `</tr>
-        `;
+        scoresHTML += createRow(i);
     }
 
     scoresHTML += `</table>
@@ -377,47 +341,23 @@ function createTable(){
 }
 
 
-function createRow(){
+function createRow(currentRow){
     let rowHTML = `<tr>
     `;
     let style;
     for(player in playerList){
         style = 'd';
-        if(roundNumber == 7 || roundNumber == 8 || roundNumber == 18){
+        if(currentRow == 6 || currentRow == 7 || currentRow == 17){
             style = 'h';
         }
-        rowHTML += `<t${style}>${playerList[player].scores[roundNumber]}</t${style}>
+        rowHTML += `<t${style}>${playerList[player].scores[currentRow]}</t${style}>
         `;
     }
     rowHTML += `</tr>
     `;
     return(rowHTML);
 }
-/*
 
-playerList[x].scores[roundNumber]
-
-roundNumber:
-0: write names, roundNumber +=1
-1: number of 1's
-2: number of 2's
-3: number of 3's
-4: number of 4's
-5: number of 5's
-6: number of 6's
-7: sum1, roundNumber +=1
-8: Bonus, roundNumber +=1
-9: best pair
-10: 2 pairs
-11: 3 of a kind
-12: 4 of a kind
-13: full house
-14: sm straight (4 consecutive)
-15: lg straight (5 consecutive)
-16: chance
-17: yatzy
-18: Total 2
-*/
 
 let leftColumn = `
 <table id="leftColumn">
