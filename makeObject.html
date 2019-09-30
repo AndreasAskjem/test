@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="username"><br/>
+    <button type="button" id="submitButton" onclick="nameIsSubmitted()">Submit</button>
+
+
+    <script type="text/javascript">
+
+    let nameList = []
+
+    function nameIsSubmitted(){
+        let submittedName = document.getElementById('username').value;
+        document.getElementById('username').value = '';
+
+        nameList.push({
+            name: submittedName,
+            score: [0, 0, 0, 0, 0],
+            sum: 5
+        })
+        console.log(submittedName);
+    }
+    
+    
+    </script>
+</body>
+</html>
