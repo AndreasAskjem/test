@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+let length = 1000000;
+let maxValue = 20;
+let minValue = 0;
+let randomList = [];
+for(let i=0; i<length; i++){
+    let range = maxValue - minValue + 1;
+    let number = Math.floor(Math.random()*range);
+    randomList.push(number);
+}
+
+
+let arrayMath = {
+    double: function(input){
+        let output=[];
+        for(let i in input){
+            output[i] = input[i]*2;
+        }
+        return(output);
+    },
+    half: function(input){
+        let output=[];
+        for(let i in input){
+            output[i] = input[i]/2;
+        }
+        return(output);
+    },
+    sum: function(input){
+        let output = 0;
+        for(let i in input){
+            output += input[i];
+        }
+        return(output);
+    },
+    max: function(input){
+        let max = input[0];
+        for(let i in input){
+            max = max < input[i] ? input[i] : max;
+        }
+        return(max);
+    },
+    min: function(input){
+        let min = input[0];
+        for(let i in input){
+            min = min > input[i] ? input[i] : min;
+        }
+        return(min);
+    },
+    sort: function(input){
+        let output = input.sort(function(a, b){return a - b});
+        return(output);
+    },
+    mean: function(input){
+        let sum = 0;
+        for(let i in input){
+            sum += input[i];
+        }
+        let output = sum / input.length;
+        return(output);
+    }
+}
+
+console.log(randomList);
+console.log(arrayMath.double(randomList));
+console.log(arrayMath.half(randomList));
+console.log(arrayMath.sum(randomList));
+console.log(arrayMath.max(randomList));
+console.log(arrayMath.min(randomList));
+console.log(arrayMath.sort(randomList));
+console.log(arrayMath.mean(randomList));
+
+</script>
+</body>
+</html>
