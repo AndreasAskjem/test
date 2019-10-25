@@ -9,7 +9,7 @@
     
 <script>
 
-let length = 1000000;
+let length = 1;
 let maxValue = 20;
 let minValue = 0;
 let randomList = [];
@@ -21,7 +21,7 @@ for(let i=0; i<length; i++){
 
 
 let arrayMath = {
-    double: function(input){
+    double: input => {
         let output=[];
         for(let i in input){
             output[i] = input[i]*2;
@@ -69,6 +69,13 @@ let arrayMath = {
         return(output);
     }
 }
+
+let thing = input => input*2;
+
+x=3;
+thing(x);
+console.log(thing(x))
+console.log(thing(x))
 
 console.log(randomList);
 console.log(arrayMath.double(randomList));
