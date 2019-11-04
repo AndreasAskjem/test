@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+let x = [true, true, true, true];
+
+// returns true if every element in array is true.
+let y = x.reduce((sum, value) => sum && value);
+console.log(y);
+
+let a = 213;
+let b = 986;
+let c = {a,b}
+
+
+let itertations = 100000000;
+y = 0;
+let startTime = new Date();
+let i = 0;
+while(i++ < itertations){
+    y = 0;
+}
+let stopTime = new Date();
+console.log((stopTime - startTime)/1000);
+
+startTime = new Date();
+for(let j=0; j<itertations; j++){
+    y = 0;
+}
+stopTime = new Date();
+console.log((stopTime - startTime)/1000);
+
+startTime = new Date();
+let k=itertations;
+while(k--){
+    y = 0;
+}
+stopTime = new Date();
+console.log((stopTime - startTime)/1000);
+
+console.log(`
+ _   _   ____   _      _      _____   _
+| | | | |  __| | |    | |    |  _  | | |
+| |_| | | |_   | |    | |    | | | | | |
+|  _  | |  _|  | |    | |    | | | | |_|
+| | | | | |__  | |__  | |__  | |_| |  _ 
+|_| |_| |____| |____| |____| |_____| |_|
+`);
+
+</script>
+</body>
+</html>
