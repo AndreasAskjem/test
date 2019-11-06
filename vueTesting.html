@@ -11,29 +11,97 @@
 <body>
 
 <div id="app-2">
-    <span v-bind:title="message">
+    <button v-on:click="countButtonPresses">Button</button>
+    <div>{{buttonCount}}</div> <br>
+    <div>{{message2}}</div>
+    <input type="text" v-model="message2"> <br> <br>
+    <span v-bind:title="message" v-if="visible">
         Hover your mouse over me for a few seconds
         to see my dynamically bound title!
     </span>
+    <div>
+      This is text <br/>
+      <li v-for="l in listOfStuff"> {{l.number}}</li>
+    </div>
 </div>
     
 
 <script>
 
-//let someDate = new Date().toLocaleString();
-function getSomeDate(){
-    let someDate = new Date().toLocaleString();
-    return someDate;
+
+let x = [
+  [true, true, true, true, true],
+  [true, true, true, true, true],
+  [true, true, true, true, true],
+  [true, true, true, true, true],
+  [true, true, true, false, true]
+]
+
+let output = x.flat().reduce((sum, value) => sum && value);
+
+function isAllTrue(y){
+  return y.flat().reduce((sum, value) => sum && value);
 }
 
-//setInterval(getSomeDate, 1000);
 
-var app2 = new Vue({
+console.log('Output 1 ' + output)
+
+let result = true;
+for(let i in x){
+  for(let j in x[i]){
+    result = x[i][j] && result;
+  }
+}
+console.log(result);
+
+setInterval(getSomeDate, 1000);
+let i=0;
+function getSomeDate(){
+    app2.message = 'The time is ' +  new Date().toLocaleString();
+    //app2.visible = !app2.visible;
+    i++;
+    if(i%2===0){
+      app2.listOfStuff = getNumbers();
+    }
+    if(i == 9){
+      app2.visible = false;
+      i = 0;
+    }
+    else{
+      app2.visible = true;
+    }
+}
+
+
+
+let numbers = [];
+let buttonCounter = 0;
+function getNumbers(){
+  let n = [];
+  for(let counter = 0; counter<10; counter ++){
+    n.push({number: Math.floor(Math.random()*11)});
+  }
+  return(n);
+}
+
+let app2 = new Vue({
   el: '#app-2',
   data: {
-    message: 'You loaded this page on ' + getSomeDate()
+    buttonCount: `You have pressed the button 0 times.`,
+    message: 'The time is ' +  new Date().toLocaleString(),
+    visible: true,
+    listOfStuff: getNumbers(),
+    message2: 'This text copies the text field'
+  },
+  methods: {
+    countButtonPresses: function (){
+      buttonCounter++;
+      app2.buttonCount = `You have pressed the button ${buttonCounter} ${buttonCounter == 1 ? ' time.' : ' times.'}`
+
+    }
   }
 })
+
 
 </script>
 
