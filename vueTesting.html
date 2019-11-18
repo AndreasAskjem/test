@@ -36,29 +36,6 @@
 
 <script>
 
-
-let x = [
-  [true, true, true, true, true],
-  [true, true, true, true, true],
-  [true, true, true, true, true],
-  [true, true, true, true, true],
-  [true, true, true, true, true]
-]
-
-
-let output = x.flat().reduce((sum, value) => sum && value);
-console.log('Output 1 ' + output)
-
-
-let result = true;
-for(let i in x){
-  for(let j in x[i]){
-    result = x[i][j] && result;
-  }
-}
-console.log(result);
-
-
 setInterval(getSomeDate, 1000);
 let i=0;
 function getSomeDate(){
