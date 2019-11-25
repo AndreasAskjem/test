@@ -9,6 +9,8 @@
 
 <script>
 
+// Tester for å bli mer kjent med reduce.
+
 let x = [true, true, true, true];
 
 // returns true if every element in array is true.
@@ -21,7 +23,6 @@ let c = {a,b}
 
 
 
-
 //Reduce nested array
 let x = [
   [true, true, true, true, true],
@@ -31,11 +32,12 @@ let x = [
   [true, true, true, true, true]
 ]
 
-
+// Bruke reduce for en lite med lister. Finner ut om alle er "true" eller ikke.
 let output = x.flat().reduce((sum, value) => sum && value);
 console.log('Output 1 ' + output)
 
 
+// Denne dobble for løkken gjør det samme på en mer tradisjonell måte.
 let result = true;
 for(let i in x){
   for(let j in x[i]){
@@ -48,8 +50,8 @@ console.log(result);
 
 
 
-
-let itertations = 100000000;
+// Noen tester for å sjekke hastigheten til forskjellige løkke typer.
+let itertations = 10000000;
 y = 0;
 let startTime = new Date();
 let i = 0;
