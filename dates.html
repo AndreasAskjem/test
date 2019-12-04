@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="time" type="time">
+    <button onclick="submitTime()">Submit</button><br/>
+    <input id="date" type="date">
+    <button onclick="submitDate()">Submit</button><br/>
+    <input id="dateTime" type="datetime-local">
+    <button onclick="submitDateTime()">Submit</button>
+
+    <script>
+    let submittedTime;
+    function submitTime(){
+        submittedTime = document.getElementById('time').value;
+        console.log(submittedTime);
+    }
+    
+
+    let submittedDate;
+    function submitDate(){
+        submittedDate = document.getElementById('date').value;
+        console.log(submittedDate);
+        console.log(submittedDate.slice(8,10) + "/" + submittedDate.slice(5,7) + "/" + submittedDate.slice(0,4));
+    }
+
+    function submitDateTime(){
+        submittedDateTime = document.getElementById('dateTime').value;
+        console.log(submittedDateTime);
+    }
+    
+    </script>
+</body>
+</html>
