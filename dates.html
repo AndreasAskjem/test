@@ -8,8 +8,10 @@
 <body>
     <input id="time" type="time">
     <button onclick="submitTime()">Submit</button><br/>
+
     <input id="date" type="date">
     <button onclick="submitDate()">Submit</button><br/>
+
     <input id="dateTime" type="datetime-local">
     <button onclick="submitDateTime()">Submit</button>
 
@@ -19,7 +21,6 @@
         submittedTime = document.getElementById('time').value;
         console.log(submittedTime);
     }
-    
 
     let submittedDate;
     function submitDate(){
