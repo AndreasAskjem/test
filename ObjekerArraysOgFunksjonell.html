@@ -1,0 +1,239 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objekter</title>
+
+    <style>
+    p{
+        max-width: 350px;
+    }
+    </style>
+</head>
+<body>
+
+<p>
+Her er det flere eksempler for hvordan en kan gjøre diverse opperasjoner med objekter og arrays. Det er brukt en del
+funksjonell programering, med ting som filter() og sort(), siden disse kan forenkle koden mye og er praktiske å kunne. <br/><br/>
+
+/* Kommentarer er skrevet slik */<br/>
+/**** Oppgaver er skrevet slik ****/<br/>
+//Og kommentert ut kode er slik<br/><br/>
+
+Ha konsollen i nettleseren oppe og ta vekk skråstrekene forran relevante consoel.log()-er for å bedre se hva som foregår.
+</p>
+
+
+<script>
+
+let arr = [5, 3, 7, 2, 7, 6, 1, 9, 1];
+
+/* Bruk filter() til å lage en array som kun inneholder tall høyere enn 5 */
+
+let aboveFive1 = arr.filter(number => number > 5);
+//console.log("First filter: " + aboveFive1);
+
+
+/* filter() går gjennom et array, ett element av gangen. I dette tilfellet blir hvert tall lagt
+   i variablen "number", og "number" blir lagt til et array hvis "number > 5" er lik "true", og
+   til slutt blir dette nye arrayet lagret i 'aboveFive1' */
+
+/* En "arrow function" som den over kan være vanskelig å forstå, og vanskelig å bruke ved mer
+   komplekse oppgaver. Da kan det utvides til en anonym funksjon som den under */
+
+let aboveFive2 = arr.filter(function (number){
+    if(number > 5){
+        return(number);
+    }
+    else{
+        return;
+    }
+});
+//console.log("Second filter: " + aboveFive2);
+
+/* Hvis man ønsker så kan det utvides videre til en egen funksjon. Dette er spesielt praktisk
+   hvis det er noe som skal brukes flere steder i koden, eller for å gjøre koden mer oversiktlig. */
+
+let aboveFive3 = arr.filter(numbersOverFive);
+
+function numbersOverFive(number){
+    if(number > 5){
+        return(number);
+    }
+}
+//console.log("Third filter: " + aboveFive3);
+
+/* Hvis "else" ikke skal retunere noen verdier, så kan den droppes */
+
+/**** Prøv å bruke filter() til å lage et nytt array som kun inneholder verdiene fra 'arr' som er større
+      enn 2 og mindr enn 8.****/
+
+
+
+
+
+/* Hvis man skal gjøre liknende oppgaver med objekter blir det noe vanskeligere, siden man ikke kan bruke
+   filter() direkte på et objekt. Så vi kan starte med et enkelt objekt: */
+
+let model = {
+    a: 5,
+    b: 9,
+    c: 1,
+    d: 7,
+    e: 2,
+    f: 6,
+    g: 4,
+}
+
+/* Først er det greit å vite om de forskjellige måtene å få tak i verdier i et objekt.
+   Alle disse tre gjør det samme: */
+
+//console.log(model.b);
+
+//console.log(model['b']);
+
+let someVariable = 'b';
+//console.log(model[someVariable]);
+
+/* Den tredje varianten er nyttig, siden med keys() så kan en lage et array med kun navnet på alle elementene i et
+   objekt (i dette tilfellet 'a', 'b', 'c'...), og deretter bruke dette arrayet til å gå gjennom objektet på nesten
+   samme måte som et array. */
+
+/* Slik bruker man keys(): */
+let namesInObject = Object.keys(model);
+//console.log(namesInObject);
+
+/* Man kan ikke bruke filter() her, men det er liknende måter for å gjøre det samme */
+/* For eksempel forEach() "gjør noe" med hvert element i et array. Her er det alternativer for ting som å lage
+   et array med bare verdiene over 5, array med navnene som har verdier over 5, eller lage et nytt objekt
+   med de riktige elementene. */
+/* Her er det viktig å si at variablene er et array eller objekt først, ellers fungerer det ikke å legge til
+   verdier på denne måten. */
+let aboveFiveArrayValues = [];
+let aboveFiveArrayNames = [];
+let aboveFiveObject = {};
+let aboveFive4 = namesInObject.forEach(function (name){
+    if(model[name] > 5){
+        aboveFiveArrayValues.push(model[name]);
+        aboveFiveArrayNames.push(name);
+        aboveFiveObject[name] = model[name];
+    }
+});
+//console.log(aboveFiveArrayValues);
+//console.log(aboveFiveArrayNames);
+//console.log(aboveFiveObject);
+
+
+
+/* Hvis man derimot har et array med objekter, så kan filter() brukes for å få tak i de riktige objektene. */
+
+let arrayWithObjects = [
+    {
+        x: 2,
+        y: 7,
+        z: 4,
+    },
+    {
+        x: 6,
+        y: 7,
+        z: 1,
+    },
+    {
+        x: 1,
+        y: 3,
+        z: 5,
+    },
+    {
+        x: 2,
+        y: 4,
+        z: 1,
+    },
+    {
+        x: 7,
+        y: 2,
+        z: 2,
+    },
+]
+/* For eksempel her blir det laget et nytt array med bare objektene der 'a' er større enn 5: */
+let filteredArrayWithObjects = arrayWithObjects.filter(obj => obj.x > 5);
+//console.log("Objekter i liste:", filteredArrayWithObjects);
+
+/* Som nevnt på toppen, så går filter() gjennom et element av gangen i et array, putter elementet i
+   variablen på started (i dette tilfellet 'obj'), gjør en sammenlikning, og returnerer elementer hvis
+   sammenlikningen er 'true'. */
+
+/**** Prøv bruke filter() til å lage ett nytt array som kun inneholder objektene der 'z' er mindre enn 'x'. ****/
+
+
+
+/* En annen ting som kan være lurt er å kunne sortere et array med objekter. */
+/* Men først et eksempel på hvordan sort() kan brukes på et enkelt array: */
+
+//arr.sort((a, b) => a - b);
+//console.log(arr);
+
+/* sort() kan være vanskelig å forstå, men den sammenlikner to verdier (i dette tilfellet kalt a og b,
+   men de kan hete hva som helst) fra et array, og returnerer dem i rekkefølge basert på sammenlikningen.
+   Hvis sammenlikningen "a - b" enders til "b - a" vil det sorteres i synkende rekkefølge istedet for stigende. */
+
+/* Det er viktig å vite at sort() direkte endrer det arrayet det blir brukt på. Derfor er eksemplene kommentert
+   ut her, så de ikke påvirker de første eksemplene. */
+
+/* Å sortere objekter i et array er veldig likt, men man må spesifisere hvilken hverdi i hvert
+   objekt som skal sammenliknes. Her sorteres det etter verdiene i x: */
+
+//arrayWithObjects.sort((a, b) => a.x - b.x);
+//console.log(arrayWithObjects);
+
+/* Det er også mulig å sortere etter en sekunder verdi hvis den første er lik.
+   Her blir objektene sortert etter x, men blir sortert etter y hvis x er like. */
+
+//arrayWithObjects.sort((a, b) => a.x - b.x || a.y - b.y);
+//console.log(arrayWithObjects);
+
+
+
+let randomDates = [
+    {
+        date: '2018-04-18'
+    },
+    {
+        date: '2018-04-17'
+    },
+    {
+        date: '2019-03-18'
+    },
+    {
+        date: '2019-07-11'
+    },
+    {
+        date: '2019-01-18'
+    },
+    {
+        date: '1997-01-02'
+    },
+]
+
+/* Dato formatet her er skrevet på en måte som sort() ikke kan forstå direkte. Løsningen er å dele opp
+   teksten til et array med år, måned og dag hver for seg. */
+
+/* Her kommer split() til unsetning.
+   '1997-01-02'.split('-') blir til ['1997', '01', '02']
+   Det som står i parentesen (bindestrek) blir fjernet fra den orginale stringen, og er også der den blir delt opp. */
+
+randomDates.sort(function(a, b){
+    let dateA = a.date.split('-');
+    let dateB = b.date.split('-');
+
+    return(dateA[0] - dateB[0]);
+});
+//console.log(randomDates);
+
+/**** Denne koden sorterer datoene etter år. Prøv å endre den så måned og dag også blir tatt hensyn til. ****/
+
+
+</script>
+
+</body>
+</html>
