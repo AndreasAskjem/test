@@ -15,10 +15,11 @@
 
 <p>
 Her er det flere eksempler for hvordan en kan gjøre diverse opperasjoner med objekter og arrays. Det er brukt en del
-funksjonell programering, med ting som filter() og sort(), siden disse kan forenkle koden mye og er praktiske å kunne. <br/><br/>
+funksjonell programering, med ting som filter() og sort(), siden disse kan forenkle koden mye og er praktiske å kunne.
+Åpne filen i VS/VS Code for å se eksempelkode og kommentarer. <br/><br/>
 
 /* Kommentarer er skrevet slik */<br/>
-/**** Oppgaver er skrevet slik ****/<br/>
+/**** Ting du kan prøve selv er skrevet slik ****/<br/>
 //Og kommentert ut kode er slik<br/><br/>
 
 Ha konsollen i nettleseren oppe og ta vekk skråstrekene forran relevante consoel.log()-er for å bedre se hva som foregår.
@@ -231,6 +232,39 @@ randomDates.sort(function(a, b){
 //console.log(randomDates);
 
 /**** Denne koden sorterer datoene etter år. Prøv å endre den så måned og dag også blir tatt hensyn til. ****/
+
+
+
+/* includes() er en annen ting som er sjekk å kunne når det kommer til arrays. Den returnerer 'true' hvis arrayet det
+   blir brukt på inneholder variabelen i parentesen. */
+
+let someArray = [9, 2, 8, 5, 34, 43, 12, 8];
+//console.log(someArray.includes(5));
+//console.log(someArray.includes(234));
+
+let model2 = {
+    a: [4, 8, 2],
+    b: [9, 3, 5],
+    c: [2, 1, 4],
+    d: [4, 5, 8],
+    e: [1, 4, 7],
+    f: [9, 8, 5],
+    g: [5, 3, 7]
+};
+
+/* Her er et objekt med arrays. Da går det ikke an å bruke filter(), men en kan bruke forEach() på en liknende som høyere
+   oppe (linje 80-125). Det er egentlig bare if-setningen som er annerledes. I dette tilfellet lages det et nytt objekt med
+   elementene som inneholder tallet 5. */
+
+let namesInModel2 = Object.keys(model2);
+let containsFive = {};
+namesInModel2.forEach(name => {
+    if(model2[name].includes(5)){
+        containsFive[name] = model2[name];
+    }
+})
+console.log(containsFive);
+
 
 
 </script>
