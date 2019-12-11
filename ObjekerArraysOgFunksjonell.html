@@ -15,7 +15,8 @@
 
 <p>
 Her er det flere eksempler for hvordan en kan gjøre diverse opperasjoner med objekter og arrays. Det er brukt en del
-funksjonell programering, med ting som filter() og sort(), siden disse kan forenkle koden mye og er praktiske å kunne. <br/><br/>
+funksjonell programering, med ting som filter() og sort(), siden disse kan forenkle koden mye og er praktiske å kunne.
+Åpne filen i VS/VS Code for å se eksempelkode og kommentarer. <br/><br/>
 
 /* Kommentarer er skrevet slik */<br/>
 /**** Ting du kan prøve selv er skrevet slik ****/<br/>
@@ -27,11 +28,11 @@ Ha konsollen i nettleseren oppe og ta vekk skråstrekene forran relevante consoe
 
 <script>
 
-let arr = [5, 3, 7, 2, 7, 6, 1, 9, 1];
+let numbers = [5, 3, 7, 2, 7, 6, 1, 9, 1];
 
 /* Bruk filter() til å lage en array som kun inneholder tall høyere enn 5 */
 
-let aboveFive1 = arr.filter(number => number > 5);
+let aboveFive1 = numbers.filter(number => number > 5);
 //console.log("First filter: " + aboveFive1);
 
 
@@ -42,7 +43,7 @@ let aboveFive1 = arr.filter(number => number > 5);
 /* En "arrow function" som den over kan være vanskelig å forstå, og vanskelig å bruke ved mer
    komplekse oppgaver. Da kan det utvides til en anonym funksjon som den under */
 
-let aboveFive2 = arr.filter(function (number){
+let aboveFive2 = numbers.filter(function (number){
     if(number > 5){
         return(number);
     }
@@ -55,7 +56,7 @@ let aboveFive2 = arr.filter(function (number){
 /* Hvis man ønsker så kan det utvides videre til en egen separat funksjon. Dette er spesielt praktisk
    hvis det er noe som skal brukes flere steder i koden, eller for å gjøre koden mer oversiktlig. */
 
-let aboveFive3 = arr.filter(numbersOverFive);
+let aboveFive3 = numbers.filter(numbersOverFive);
 
 function numbersOverFive(number){
     if(number > 5){
@@ -66,7 +67,7 @@ function numbersOverFive(number){
 
 /* Hvis "else" ikke skal retunere noen verdier, så kan den droppes */
 
-/**** Prøv å bruke filter() til å lage et nytt array som kun inneholder verdiene fra 'arr' som er større
+/**** Prøv å bruke filter() til å lage et nytt array som kun inneholder verdiene fra 'numbers' som er større
       enn 2 og mindr enn 8.****/
 
 
@@ -170,8 +171,8 @@ let filteredArrayWithObjects = arrayWithObjects.filter(obj => obj.x > 5);
 /* En annen ting som kan være lurt er å kunne sortere et array med objekter. */
 /* Men først et eksempel på hvordan sort() kan brukes på et enkelt array: */
 
-//arr.sort((a, b) => a - b);
-//console.log(arr);
+//numbers.sort((a, b) => a - b);
+//console.log(numbers);
 
 /* sort() kan være vanskelig å forstå, men den sammenlikner to verdier (i dette tilfellet kalt a og b,
    men de kan hete hva som helst) fra et array, og returnerer dem i rekkefølge basert på sammenlikningen.
@@ -232,6 +233,39 @@ randomDates.sort(function(a, b){
 
 /**** Denne koden sorterer datoene etter år. Prøv å endre den så måned og dag også blir tatt hensyn til. ****/
 
+
+
+/* includes() er en annen ting som er sjekk å kunne når det kommer til arrays. Den returnerer 'true' hvis arrayet det
+   blir brukt på inneholder variabelen i parentesen. */
+
+let someArray = [9, 2, 8, 5, 34, 43, 12, 8];
+//console.log(someArray.includes(5));
+//console.log(someArray.includes(234));
+
+let model2 = {
+    a: [4, 8, 2],
+    b: [9, 3, 5],
+    c: [2, 1, 4],
+    d: [4, 5, 8],
+    e: [1, 4, 7],
+    f: [9, 8, 5],
+    g: [5, 3, 7]
+};
+
+/* Her er et objekt med arrays. Da går det ikke an å bruke filter(), men en kan bruke forEach() på en liknende som høyere
+   oppe (linje 80-125). Det er egentlig bare if-setningen som er annerledes. I dette tilfellet lages det et nytt objekt med
+   elementene som inneholder tallet 5. */
+
+let namesInModel2 = Object.keys(model2);
+let containsFive = {};
+namesInModel2.forEach(name => {
+    if(model2[name].includes(5)){
+        containsFive[name] = model2[name];
+    }
+})
+//console.log(containsFive);
+
+/**** Hva med å lage et nytt objekt som ekskluderer alle elementer med 5? ****/
 
 </script>
 
