@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script>
+    
+    let totalHTML = makeDropDown(1,31);
+    totalHTML += makeDropDown(2019,2025);
+    
+    
+    
+    function makeDropDown(start, end){
+        let html = `<select onchange="someFunction(this)" onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;">`;
+        for(i=start; i<end+1; i++){
+            html += `<option>${i}</option>`;
+        }
+        html += `</select>`;
+        return(html);
+    }
+
+    
+    document.getElementById('content').innerHTML = totalHTML;
+    
+    function someFunction(element){
+        console.log(element.value);
+    }
+</script>
+</body>
+</html>
