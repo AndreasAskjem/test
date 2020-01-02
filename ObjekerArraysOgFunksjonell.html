@@ -94,7 +94,7 @@ let model = {
 
 //console.log(model['b']);
 
-let someVariable = 'b';
+//let someVariable = 'b';
 //console.log(model[someVariable]);
 
 /* Den tredje varianten er nyttig, siden med keys() så kan en lage et array med kun navnet på alle elementene i et
@@ -105,7 +105,7 @@ let someVariable = 'b';
 let namesInObject = Object.keys(model);
 //console.log(namesInObject);
 
-/* Man kan ikke bruke filter() her, men det er liknende måter for å gjøre det samme */
+/* Man kan ikke bruke filter() her, men det er liknende måter for å gjøre det samme. */
 /* For eksempel forEach() "gjør noe" med hvert element i et array. Her er det alternativer for ting som å lage
    et array med bare verdiene over 5, array med navnene som har verdier over 5, eller lage et nytt objekt
    med de riktige elementene. */
@@ -156,7 +156,7 @@ let arrayWithObjects = [
         z: 2,
     },
 ]
-/* For eksempel her blir det laget et nytt array med bare objektene der 'a' er større enn 5: */
+/* For eksempel her blir det laget et nytt array med bare objektene der 'x' er større enn 5: */
 let filteredArrayWithObjects = arrayWithObjects.filter(obj => obj.x > 5);
 //console.log("Objekter i liste:", filteredArrayWithObjects);
 
