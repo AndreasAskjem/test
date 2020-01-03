@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        font-size: 30px;
+    }
+    button{
+        height: 40px;
+        width: 80px;
+    }
+    </style>
+</head>
+<body>
+    <div id="dateDiv"></div>
+
+    <button onclick="incrementOneDay(someDate, -1)">-1 day</button>
+    <button onclick="incrementOneDay(someDate, 1)">+1 day</button>
+
+    <script>
+        let someDate = '2020-01-03'
+        document.getElementById('dateDiv').innerHTML = someDate;
+
+        // Mostly copied from stackOverflow.
+        // https://stackoverflow.com/a/5116693/12216676
+        function incrementOneDay(inputDate, direction){
+            let parts = inputDate.split("-");
+            let dt = new Date(
+                parseInt(parts[0], 10),
+                parseInt(parts[1], 10) - 1,
+                parseInt(parts[2], 10)
+            );
+            
+            dt.setDate(dt.getDate() + direction); //changes day
+            parts[0] = "" + dt.getFullYear();
+            parts[1] = "" + (dt.getMonth() + 1);
+            if (parts[1].length < 2) {
+                parts[1] = "0" + parts[1];
+            }
+            parts[2] = "" + dt.getDate();
+            if (parts[2].length < 2) {
+                parts[2] = "0" + parts[2];
+            }
+            someDate = parts.join("-");
+            document.getElementById('dateDiv').innerHTML = someDate;
+        }
+    </script>
+</body>
+</html>
