@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-    console.log('------------')
+    console.log('--------------------')
     console.log('addUp')
     console.log(addUp(4))
     console.log(addUp(13))
@@ -22,7 +22,7 @@
     }
 
 
-    console.log('------------')
+    console.log('--------------------')
     console.log('arrayOfMultiples')
     console.log(arrayOfMultiples(7, 5)) // [7, 14, 21, 28, 35]
     console.log(arrayOfMultiples(12, 10)) // [12, 24, 36, 48, 60, 72, 84, 96, 108, 120]
@@ -37,7 +37,7 @@
     }
 
 
-    console.log('------------')
+    console.log('--------------------')
     console.log('objectToArray')
     console.log(objectToArray({
         D: 1,
@@ -59,7 +59,7 @@
     }
 
 
-    console.log('------------')
+    console.log('--------------------')
     console.log('checkEquals')
     console.log(checkEquals([1, 2], [1, 3])) // false
     console.log(checkEquals([1, 2], [1, 2])) // true
@@ -78,7 +78,7 @@
 
 
     //https://edabit.com/challenge/6R6gReGTGwzpwuffD
-    console.log('------------')
+    console.log('--------------------')
     console.log('sevenBoom')
     console.log(sevenBoom([1, 2, 3, 4, 5, 6, 7])) // "Boom!"
     console.log(sevenBoom([8, 6, 33, 100])) // "there is no 7 in the array"
@@ -98,7 +98,7 @@
 
     
     //https://edabit.com/challenge/dNRax8eQSxov984Xx
-    console.log('------------')
+    console.log('--------------------')
     console.log('apocalyptic')
     console.log(apocalyptic(109)) // "Crisis averted. Resume sinning."
     console.log(apocalyptic(157)) // "Repent! 9 days until the Apocalypse!"
@@ -118,7 +118,7 @@
 
 
     //https://edabit.com/challenge/yXSTvCNen2DQHyrh6
-    console.log('------------')
+    console.log('--------------------')
     console.log('getLength')
     console.log(getLength([1, [2, 3]])) // 3
     console.log(getLength([1, [2, [3, 4]]])) // 4
@@ -131,7 +131,7 @@
 
 
     //https://edabit.com/challenge/dq5bqbRnPwDxJyobL
-    console.log('------------')
+    console.log('--------------------')
     console.log('emptySq')
     console.log(emptySq(1)) // 0
     console.log(emptySq(3)) // 24
@@ -145,7 +145,7 @@
 
 
     //https://edabit.com/challenge/eCPim4XcssdZdvs32
-    console.log('------------')
+    console.log('--------------------')
     console.log('numInStr')
     console.log(numInStr(["1a", "a", "2b", "b"])) // ["1a", "2b"]
     console.log(numInStr(["abc", "abc10"])) // ["abc10"]
@@ -166,7 +166,7 @@
 
 
     //https://edabit.com/challenge/8khL2WEhZ6M9onHL4
-    console.log('------------')
+    console.log('--------------------')
     console.log('countLayers')
     console.log(countLayers([
         "AAAA",
@@ -207,6 +207,167 @@
             }
         }
         return(layers);
+    }
+
+
+    //https://edabit.com/challenge/3hdXjfJozQySRC3gE
+    console.log('--------------------')
+    console.log('getDays')
+    console.log(getDays(
+        new Date("June 14, 2019"),
+        new Date("June 20, 2019")
+    )) // 6
+    console.log(getDays(
+        new Date("December 29, 2018"),
+        new Date("January 1, 2019")
+    )) // 3
+    console.log(getDays(
+        new Date("July 20, 2019"),
+        new Date("July 30, 2019")
+    )) // 10
+
+    function getDays(date1, date2){
+        return((date2-date1)/1000/3600/24)
+    }
+
+
+    //https://edabit.com/challenge/pnd7xPYuvogkNfHg6
+    console.log('--------------------')
+    console.log('getBestStudent')
+    console.log(getBestStudent({
+        John: [100, 90, 80],
+        Bob: [100, 70, 80]
+    })) // "John"
+    console.log(getBestStudent({
+        Susan: [67, 84, 75, 63],
+        Mike: [87, 98, 64, 71],
+        Jim: [90, 58, 73, 86]
+    })) // "Mike"
+
+    function getBestStudent(students){
+        let names = Object.keys(students);
+        let averages = [];
+        names.forEach(name => {
+            averages.push(findAverage(students[name]))
+        })
+        let indexOfHighestAverage = 0;
+        for(i=1; i<names.length; i++){
+            if(averages[i]>averages[i-1]){
+                indexOfHighestAverage = i;
+            }
+        }
+        return(names[indexOfHighestAverage]);
+    }
+    function findAverage(scores){
+        sum = 0;
+        scores.forEach(score => sum+=score)
+        return(sum/scores.length);
+    }
+
+
+    //https://edabit.com/challenge/jRSST87NjECBzbwzL
+    console.log('--------------------')
+    console.log('getTotalPrice')
+    // 1 bottle of milk:
+    console.log(getTotalPrice([
+        { product: "Milk", quantity: 1, price: 1.50 }
+    ])) // 1.5
+
+    // 1 bottle of milk & 1 box of cereals:
+    console.log(getTotalPrice([
+        { product: "Milk", quantity: 1, price: 1.50 },
+        { product: "Cereals", quantity: 1, price: 2.50 }
+    ])) // 4
+    // 3 bottles of milk:
+    console.log(getTotalPrice([
+        { product: "Milk", quantity: 3, price: 1.50 }
+    ])) // 4.5
+    // Several groceries:
+    console.log(getTotalPrice([
+        { product: "Milk", quantity: 1, price: 1.50 },
+        { product: "Eggs", quantity: 12, price: 0.10 },
+        { product: "Bread", quantity: 2, price: 1.60 },
+        { product: "Cheese", quantity: 1, price: 4.50 }
+    ])) // 10.4
+    // Some cheap candy:
+    console.log(getTotalPrice([
+        { product: "Chocolate", quantity: 1, price: 0.10 },
+        { product: "Lollipop", quantity: 1, price: 0.20 }
+    ])) // 0.3
+
+    function getTotalPrice(products){
+        let sum = 0;
+        products.forEach(product => sum += product.quantity*product.price);
+        return(sum);
+    }
+
+
+    //https://edabit.com/challenge/P5aEB9rvFibg4rRBg
+    console.log('--------------------')
+    console.log('palindromeType')
+    console.log(palindromeType(1306031)) // "Decimal only."
+    // decimal = 1306031
+    // binary  = '100111110110110101111'
+
+    console.log(palindromeType(427787)) // "Binary only."
+    // decimal = 427787
+    // binary  = '1101000011100001011'
+
+    console.log(palindromeType(313)) // "Decimal and binary."
+    // decimal = 313
+    // binary  = 100111001
+
+    console.log(palindromeType(934)) // "Neither!"
+    // decimal = 934
+    // binary  = '1110100110'
+
+    function palindromeType(number){
+        let numberStr = number.toString();
+        let binaryStr = number.toString(2);
+        let numberPalindrome = numberStr == reverseStr(numberStr);
+        let binaryPalindrome = binaryStr == reverseStr(binaryStr);
+        
+        if(numberPalindrome && binaryPalindrome){
+            return("Decimal and binary.");
+        }
+        else if(numberPalindrome && !binaryPalindrome){
+            return("Decimal only.");
+        }
+        else if(!numberPalindrome && binaryPalindrome){
+            return("Binary only.");
+        }
+        else{
+            return("Neither!");
+        }
+    }
+    function reverseStr(str){
+        let arr = str.split('');
+        let reversedStr = "";
+        arr.reverse();
+        arr.forEach(a => reversedStr += a)
+        return(reversedStr);
+    }
+
+
+
+    //https://edabit.com/challenge/9MEWMJ5eX8EAiWSs5
+    console.log('--------------------')
+    console.log('characterMapping')
+    console.log(characterMapping("abcd")) // [0, 1, 2, 3]
+    console.log(characterMapping("abb")) // [0, 1, 1]
+    console.log(characterMapping("babbcb")) // [0, 1, 0, 0, 2, 0]
+    console.log(characterMapping("hmmmmm")) // [0, 1, 1, 1, 1, 1]
+
+    function characterMapping(str){
+        let usedChars = [];
+        let mapping = []
+        for(i=0; i< str.length; i++){
+            if(!usedChars.includes(str[i])){
+                usedChars.push(str[i]);
+            }
+            mapping.push(usedChars.indexOf(str[i]));
+        }
+        return(mapping);
     }
 
     </script>

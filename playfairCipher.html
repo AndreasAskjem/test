@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Message</td>
+            <td><input type="text" id="message"></td>
+        </tr>
+        <tr>
+            <td>Keyword</td>
+            <td><input type="text" id="keyword"></td>
+        </tr>
+    </table>
+    
+    <button onclick="playfair()">Encrypt!</button>
+    <div id="result">a</div>
+    
+    <script>
+    playfair("Tomorrow we attack.", "python") // "HPSYXHSHXZUGBYYBDI"
+
+    playfair("HPSYXHSHXZUGBYYBDI", "python") // "TOMORXROWXWEATTACK"
+
+    playfair("MYDZABIFBMENFEQAAE", "rhythm") // "THEXEAGLEHASLANDED"
+    
+    function playfair(message, keyword){
+        //message = document.getElementById('message').innerHTML;
+        //keyword = document.getElementById('keyword').innerHTML;
+
+        
+        square = makeSquare(keyword);
+
+
+
+    }
+
+    function makeSquare(keyword){
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXY"
+
+        let keyWithoutDup = "";
+        for(i=0; i<keyword.length; i++){
+            if(!keyWithoutDup.includes(keyword[i])){
+                keyWithoutDup += keyword[i];
+            }
+        }
+
+        let alphabetWithoutDup = "";
+        for(i=0; i<alphabet.length; i++){
+            if(!keyword.includes(alphabet[i])){
+                console.log(alphabet[i]);
+                alphabetWithoutDup += alphabet[i];
+            }
+        }
+        console.log(keyWithoutDup);
+        console.log(alphabetWithoutDup);
+        return('aaaaa')
+    }
+    
+    </script>
+</body>
+</html>
