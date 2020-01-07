@@ -1,0 +1,214 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    console.log('------------')
+    console.log('addUp')
+    console.log(addUp(4))
+    console.log(addUp(13))
+    console.log(addUp(600))
+
+    function addUp(input){
+        let sum = 0;
+        for(i=0; i<=input; i++){
+            sum += i;
+        }
+        return(sum);
+    }
+
+
+    console.log('------------')
+    console.log('arrayOfMultiples')
+    console.log(arrayOfMultiples(7, 5)) // [7, 14, 21, 28, 35]
+    console.log(arrayOfMultiples(12, 10)) // [12, 24, 36, 48, 60, 72, 84, 96, 108, 120]
+    console.log(arrayOfMultiples(17, 6)) // [17, 34, 51, 68, 85, 102]
+
+    function arrayOfMultiples(num, length){
+        let arr = [];
+        for(i=0; i<length; i++){
+            arr.push((i+1)*num)
+        }
+        return(arr);
+    }
+
+
+    console.log('------------')
+    console.log('objectToArray')
+    console.log(objectToArray({
+        D: 1,
+        B: 2,
+        C: 3
+    })) // [["D", 1], ["B", 2], ["C", 3]]
+    console.log(objectToArray({
+        likes: 2,
+        dislikes: 3,
+        followers: 10
+    })) // [["likes", 2], ["dislikes", 3], ["followers", 10]]
+    function objectToArray(input){
+        let arr = [];
+        let names = Object.keys(input);
+        for(i in names){
+            arr.push(names[i], input[names[i]])
+        }
+        return arr;
+    }
+
+
+    console.log('------------')
+    console.log('checkEquals')
+    console.log(checkEquals([1, 2], [1, 3])) // false
+    console.log(checkEquals([1, 2], [1, 2])) // true
+    console.log(checkEquals([4, 5, 6], [4, 5, 6])) // true
+    console.log(checkEquals([4, 7, 6], [4, 5, 6])) // false
+
+    function checkEquals(arr1, arr2){
+        let result = true;
+        for(i=0; i<arr1.length; i++){
+            if(arr1[i] !== arr2[i]){
+                result = false;
+            }
+        }
+        return(result);
+    }
+
+
+    //https://edabit.com/challenge/6R6gReGTGwzpwuffD
+    console.log('------------')
+    console.log('sevenBoom')
+    console.log(sevenBoom([1, 2, 3, 4, 5, 6, 7])) // "Boom!"
+    console.log(sevenBoom([8, 6, 33, 100])) // "there is no 7 in the array"
+    console.log(sevenBoom([2, 55, 60, 97, 86])) // "Boom!"
+
+    function sevenBoom(arr){
+        for(i=0; i<arr.length; i++){
+            let numberAsString = arr[i].toString();
+            for(j=0; j<numberAsString.length; j++){
+                if(numberAsString[j]=='7'){
+                    return("Boom!")
+                }
+            }
+        }
+        return("There is no 7 in the array")
+    }
+
+    
+    //https://edabit.com/challenge/dNRax8eQSxov984Xx
+    console.log('------------')
+    console.log('apocalyptic')
+    console.log(apocalyptic(109)) // "Crisis averted. Resume sinning."
+    console.log(apocalyptic(157)) // "Repent! 9 days until the Apocalypse!"
+    console.log(apocalyptic(175)) // "Crisis averted. Resume sinning."
+    console.log(apocalyptic(220)) // "Repent! 6 days until the Apocalypse!"
+
+    function apocalyptic(input){
+        //The numbers are too big for JS to handle them normally without rounding
+        //BigInt fixes that
+        let number = BigInt(2**input).toString();
+        let index = number.indexOf("666");
+        if(index>=0){
+            return(`Repent! ${index} days until the Apocalypse!`);
+        }
+        return("Crisis averted. Resume sinning.");
+    }
+
+
+    //https://edabit.com/challenge/yXSTvCNen2DQHyrh6
+    console.log('------------')
+    console.log('getLength')
+    console.log(getLength([1, [2, 3]])) // 3
+    console.log(getLength([1, [2, [3, 4]]])) // 4
+    console.log(getLength([1, [2, [3, [4, [5, 6]]]]])) // 6
+    console.log(getLength([1, [2], 1, [2], 1])) // 5
+
+    function getLength(arr){
+        return(arr.flat(Infinity).length);
+    }
+
+
+    //https://edabit.com/challenge/dq5bqbRnPwDxJyobL
+    console.log('------------')
+    console.log('emptySq')
+    console.log(emptySq(1)) // 0
+    console.log(emptySq(3)) // 24
+    console.log(emptySq(10)) // 360
+
+    function emptySq(input){
+        let squares = (input*2)**2;
+        let emptySquares = squares - input*4;
+        return(emptySquares);
+    }
+
+
+    //https://edabit.com/challenge/eCPim4XcssdZdvs32
+    console.log('------------')
+    console.log('numInStr')
+    console.log(numInStr(["1a", "a", "2b", "b"])) // ["1a", "2b"]
+    console.log(numInStr(["abc", "abc10"])) // ["abc10"]
+    console.log(numInStr(["abc", "ab10c", "a10bc", "bcd"])) // ["ab10c", "a10bc"]
+    console.log(numInStr(["this is a test", "test1"])) // ["test1"]
+
+    function numInStr(input){
+        let result = [];
+        input.forEach(string => {
+            let strAsArr = string.split('');
+            let foundNumbers = strAsArr.map(character => "0123456789".includes(character));
+            if(foundNumbers.includes(true)){
+                result.push(string);
+            }
+        });
+        return(result);
+    }
+
+
+    //https://edabit.com/challenge/8khL2WEhZ6M9onHL4
+    console.log('------------')
+    console.log('countLayers')
+    console.log(countLayers([
+        "AAAA",
+        "ABBA",
+        "AAAA"
+    ])) // 2
+    console.log(countLayers([
+        "AAAAAAAAA",
+        "ABBBBBBBA",
+        "ABBAAABBA",
+        "ABBBBBBBA",
+        "AAAAAAAAA"
+    ])) // 3
+    console.log(countLayers([
+        "AAAAAAAAAAA",
+        "AABBBBBBBAA",
+        "AABCCCCCBAA",
+        "AABCAAACBAA",
+        "AABCADACBAA",
+        "AABCAAACBAA",
+        "AABCCCCCBAA",
+        "AABBBBBBBAA",
+        "AAAAAAAAAAA"
+    ])) // 5
+
+    function countLayers(rug){
+        if(rug.length < 1 || rug[0].length < 1){
+            return("The rug doesn't exist");
+        }
+        let layers = 1
+        let middleRow = rug[(rug.length-1)/2];
+        let middleRowToCenter = middleRow.slice(0, (middleRow.length+1)/2);
+        let checkedChar = middleRowToCenter[0];
+        for(char in middleRowToCenter){
+            if(checkedChar !== middleRowToCenter[char]){
+                layers++;
+                checkedChar = middleRowToCenter[char];
+            }
+        }
+        return(layers);
+    }
+
+    </script>
+</body>
+</html>
