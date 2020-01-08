@@ -18,7 +18,7 @@
     </table>
     
     <button onclick="playfair()">Encrypt!</button>
-    <div id="result">a</div>
+    <div id="result">Result</div>
     
     <script>
     playfair("Tomorrow we attack.", "python") // "HPSYXHSHXZUGBYYBDI"
@@ -31,34 +31,139 @@
         //message = document.getElementById('message').innerHTML;
         //keyword = document.getElementById('keyword').innerHTML;
 
-        
-        square = makeSquare(keyword);
+        message = message.toUpperCase();
+        keyword = keyword.toUpperCase();
 
+        let square = makeSquare(keyword);
 
+        //console.log(message);
+        message = formatMessage(message);
+        //console.log(message);
+        message = swapLetters(message, square);
+        console.log(message);
+        console.log('square', square);
 
+        //console.log(message);
     }
 
     function makeSquare(keyword){
-        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXY"
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXY";
+        
+        let square = new Array(5);
+        for(let i=0; i<5; i++){
+            square[i] = new Array(5);
+        }
 
         let keyWithoutDup = "";
-        for(i=0; i<keyword.length; i++){
+        for(let i=0; i<keyword.length; i++){
             if(!keyWithoutDup.includes(keyword[i])){
                 keyWithoutDup += keyword[i];
             }
         }
 
         let alphabetWithoutDup = "";
-        for(i=0; i<alphabet.length; i++){
+        for(let i=0; i<alphabet.length; i++){
             if(!keyword.includes(alphabet[i])){
-                console.log(alphabet[i]);
                 alphabetWithoutDup += alphabet[i];
             }
         }
-        console.log(keyWithoutDup);
-        console.log(alphabetWithoutDup);
-        return('aaaaa')
+
+        let sequence = keyWithoutDup + alphabetWithoutDup;
+
+        let row = 0;
+        let column = 0;
+        for(let i=0; i<sequence.length; i++){
+            column = i%5;
+            square[row][column] = sequence[i];
+            if(column==4){row++}
+        }
+        return(square)
     }
+
+    function formatMessage(message){
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let formated = "";
+        for(let i=0; i< message.length; i++){
+            if(alphabet.includes(message[i])){formated += message[i]}
+        }
+        return(addX(formated));
+    }
+    function addX(formated){
+        let withX = [];
+        for(let i=0; i<formated.length; i++){
+            try{
+                if(formated[i]==formated[i+1] && formated[i] !== "X"){
+                    withX.push(formated[i] + "X");
+                }
+                else{
+                    withX.push(formated[i] + formated[i+1]);
+                    i++;
+                }
+            }
+            catch{
+                withX.push(formated[formated.length-1] + "X");
+            }
+        }
+        return(withX);
+    }
+
+    function swapLetters(message, square){
+        let swapped = [];
+        let columns = findColumns(square);
+
+        for(let i=0; i<message.length; i++){
+            let pair = message[i]
+
+            for(let j=0; j<5; j++){
+                if(square[j].includes(pair[0]) && square[j].includes(pair[1])){
+                    swapped.push(replaceWithRight(pair[0], square) + replaceWithRight(pair[1], square));
+                }
+                else if(columns[j].includes(pair[0]) && columns[j].includes(pair[1])){
+                    swapped.push(replaceWithRight(pair[0], columns) + replaceWithRight(pair[1], columns));
+                }
+                else{
+                    //swapped.push(someFunction(pair, square))
+                }
+            }
+        }
+
+
+        return(swapped);
+    }
+    function replaceWithRight(char, square){
+        let newChar;
+
+        square.forEach(line => {
+            let index = line.indexOf(char);
+            if(index == 4){
+                newChar = line[0];
+            }
+            else if(index >= 0){
+                newChar = line[index+1];
+            }
+        })
+        return(newChar);
+    }
+
+    function findColumns(square){
+        let columns = new Array(5);
+
+        for(let i=0; i<5; i++){
+            columns[i] = new Array(5);
+        }
+
+        for(let i=0; i<5; i++){
+            for(let j=0; j<5; j++){
+                columns[j][i] = square[i][j];
+            }
+        }
+        return(columns);
+
+        
+    }
+
+    //function someFunction(){}
+    
     
     </script>
 </body>
