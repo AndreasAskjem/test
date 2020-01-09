@@ -38,10 +38,19 @@
 
         //console.log(message);
         message = formatMessage(message);
+        //Returns in the format ["TO", "MO", "RX"...]
+
         //console.log(message);
         message = swapLetters(message, square);
+
+        let output = ""
+        for(let i=0; i< message.length; i++){
+            output += message[i];
+        }
         console.log(message);
         console.log('square', square);
+
+        console.log(output);
 
         //console.log(message);
     }
@@ -81,7 +90,7 @@
     }
 
     function formatMessage(message){
-        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXY";
         let formated = "";
         for(let i=0; i< message.length; i++){
             if(alphabet.includes(message[i])){formated += message[i]}
@@ -112,21 +121,23 @@
         let columns = findColumns(square);
 
         for(let i=0; i<message.length; i++){
-            let pair = message[i]
+            let pair = message[i];
+            let returnedPair = null;
 
             for(let j=0; j<5; j++){
                 if(square[j].includes(pair[0]) && square[j].includes(pair[1])){
-                    swapped.push(replaceWithRight(pair[0], square) + replaceWithRight(pair[1], square));
+                    returnedPair = replaceWithRight(pair[0], square) + replaceWithRight(pair[1], square);
                 }
                 else if(columns[j].includes(pair[0]) && columns[j].includes(pair[1])){
-                    swapped.push(replaceWithRight(pair[0], columns) + replaceWithRight(pair[1], columns));
-                }
-                else{
-                    //swapped.push(someFunction(pair, square))
+                    returnedPair =  replaceWithRight(pair[0], columns) + replaceWithRight(pair[1], columns);
                 }
             }
-        }
+            if(returnedPair === null){
+                returnedPair = (squareSwap(pair, square));
+            }
 
+            swapped.push(returnedPair);
+        }
 
         return(swapped);
     }
@@ -162,7 +173,32 @@
         
     }
 
-    //function someFunction(){}
+    function squareSwap(pair, square){
+        pair = pair.split('');
+
+        let indexChar1 = findIndex(pair[0], square);
+        let indexChar2 = findIndex(pair[1], square);
+
+        console.log(pair);
+
+        let temp = indexChar1[1];
+        indexChar1[1] = indexChar2[1];
+        indexChar2[1] = temp;
+
+        let char1 = square[indexChar1[0]][indexChar1[1]];
+        let char2 = square[indexChar2[0]][indexChar2[1]];
+        console.log('char1: ', char1);
+        console.log('char2: ', char2);
+        return(char1 + char2);
+    }
+
+    function findIndex(char, square){
+        for(let i=0; i<5; i++){
+            if(square[i].includes(char)){
+                return([i, square[i].indexOf(char)]);
+            }
+        }
+    }
     
     
     </script>
