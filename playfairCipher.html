@@ -18,41 +18,36 @@
     </table>
     
     <button onclick="playfair()">Encrypt!</button>
+    <button onclick="decrypt()">Decrypt!</button>
     <div id="result">Result</div>
     
     <script>
-    playfair("Tomorrow we attack.", "python") // "HPSYXHSHXZUGBYYBDI"
+    //playfair("Tomorrow we attack.", "python") // "HPSYXHSHXZUGBYYBDI"
 
-    playfair("HPSYXHSHXZUGBYYBDI", "python") // "TOMORXROWXWEATTACK"
+    //playfair("HPSYXHSHXZUGBYYBDI", "python") // "TOMORXROWXWEATTACK"
 
-    playfair("MYDZABIFBMENFEQAAE", "rhythm") // "THEXEAGLEHASLANDED"
+    //playfair("MYDZABIFBMENFEQAAE", "rhythm") // "THEXEAGLEHASLANDED"
     
     function playfair(message, keyword){
-        //message = document.getElementById('message').innerHTML;
-        //keyword = document.getElementById('keyword').innerHTML;
+        message = document.getElementById('message').value;
+        keyword = document.getElementById('keyword').value;
 
         message = message.toUpperCase();
         keyword = keyword.toUpperCase();
 
         let square = makeSquare(keyword);
 
-        //console.log(message);
         message = formatMessage(message);
         //Returns in the format ["TO", "MO", "RX"...]
 
-        //console.log(message);
         message = swapLetters(message, square);
 
         let output = ""
         for(let i=0; i< message.length; i++){
             output += message[i];
         }
-        console.log(message);
-        console.log('square', square);
-
-        console.log(output);
-
-        //console.log(message);
+        
+        document.getElementById('result').innerHTML = output;
     }
 
     function makeSquare(keyword){
@@ -99,20 +94,20 @@
     }
     function addX(formated){
         let withX = [];
-        for(let i=0; i<formated.length; i++){
-            try{
-                if(formated[i]==formated[i+1] && formated[i] !== "X"){
-                    withX.push(formated[i] + "X");
-                }
-                else{
-                    withX.push(formated[i] + formated[i+1]);
-                    i++;
-                }
+
+        for(let i=0; i<formated.length-1; i++){
+            if(formated[i]==formated[i+1] && formated[i] !== "X"){
+                withX.push(formated[i] + "X");
             }
-            catch{
-                withX.push(formated[formated.length-1] + "X");
+            else{
+                withX.push(formated[i] + formated[i+1]);
+                i++;
             }
         }
+        if(withX.length < formated.length/2){
+            withX.push(formated[formated.length-1] + "X")
+        }
+
         return(withX);
     }
 
@@ -168,9 +163,8 @@
                 columns[j][i] = square[i][j];
             }
         }
-        return(columns);
 
-        
+        return(columns);
     }
 
     function squareSwap(pair, square){
@@ -179,16 +173,10 @@
         let indexChar1 = findIndex(pair[0], square);
         let indexChar2 = findIndex(pair[1], square);
 
-        console.log(pair);
-
-        let temp = indexChar1[1];
-        indexChar1[1] = indexChar2[1];
-        indexChar2[1] = temp;
+        [indexChar1[1], indexChar2[1]] = [indexChar2[1], indexChar1[1]];
 
         let char1 = square[indexChar1[0]][indexChar1[1]];
         let char2 = square[indexChar2[0]][indexChar2[1]];
-        console.log('char1: ', char1);
-        console.log('char2: ', char2);
         return(char1 + char2);
     }
 
