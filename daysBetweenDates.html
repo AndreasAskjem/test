@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        font-size: 30px;
+    }
+    button{
+        height: 40px;
+        width: 80px;
+    }
+    </style>
+</head>
+<body>
+    <input type="date" id="date1">
+    <input type="date" id="date2"> <br/>
+    <button onclick="calculate()">Distance</button>
+
+    <div id="output"></div>
+
+    <script>
+        function calculate(){
+            let date1 = document.getElementById('date1').value;
+            let date2 = document.getElementById('date2').value;
+
+            console.log(date1, date2);
+
+            let parts1 = date1.split("-");
+            let dt1 = new Date(
+                parseInt(parts1[0], 10),
+                parseInt(parts1[1], 10) - 1,
+                parseInt(parts1[2], 10)
+            );
+
+            let parts2 = date2.split("-");
+            let dt2 = new Date(
+                parseInt(parts2[0], 10),
+                parseInt(parts2[1], 10) - 1,
+                parseInt(parts2[2], 10)
+            );
+            
+            document.getElementById('output').innerHTML = (dt2 - dt1)/1000/3600/24;
+        }
+    </script>
+</body>
+</html>
